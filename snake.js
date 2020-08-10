@@ -7,6 +7,7 @@ let die = new Audio();
 eat.src = "eat.mp3";
 die.src = "die.mp3";
 
+let prevecode;
 let ecode;
 let l,r,u,d;
 let snakePosX=[100];
@@ -57,6 +58,7 @@ function moveLeft(){
   snake.prevX=snake.x;
   snake.prevY=snake.y;
   snake.x=snake.x-snake.width;
+  prevecode=ecode;
 }
 
 function moveUp(){
@@ -64,6 +66,7 @@ function moveUp(){
   snake.prevX=snake.x;
   snake.prevY=snake.y;
   snake.y=snake.y-snake.height;
+  prevecode=ecode;
 }
 
 function moveRight(){
@@ -71,6 +74,7 @@ function moveRight(){
   snake.prevX=snake.x;
   snake.prevY=snake.y;
   snake.x=snake.x+snake.width;
+  prevecode=ecode;
 }
 
 function moveDown(){
@@ -78,6 +82,7 @@ function moveDown(){
   snake.prevX=snake.x;
   snake.prevY=snake.y;
   snake.y=snake.y+snake.height;
+  prevecode=ecode;
 }
 
 function genRandom(){
@@ -103,30 +108,7 @@ fruit.left=fruit.x;
 return snake.left < fruit.right && snake.top < fruit.bottom && snake.right > fruit.left && snake.bottom > fruit.top;
 }
 
-document.onkeydown = function(event){
-  ecode=event.keyCode;
-  switch(event.keyCode){
-  case 37:
-      l = setInterval(moveLeft,snake.speed);
 
-    break;
-  case 38:
-
-      u = setInterval(moveUp,snake.speed);
-
-    break;
-  case 39:
-
-      r = setInterval(moveRight,snake.speed);
-
-    break;
-  case 40:
-
-      d = setInterval(moveDown,snake.speed);
-
-    break;
-  }
-};
 
 function reset(){
   die.play();
@@ -167,23 +149,24 @@ function update(){
     ecode=event.keyCode;
     switch(event.keyCode){
     case 37:
+      if(prevecode!=ecode){
         l = setInterval(moveLeft,snake.speed);
-
+      }
       break;
     case 38:
-
+      if(prevecode!=ecode){
         u = setInterval(moveUp,snake.speed);
-
+      }
       break;
     case 39:
-
+      if(prevecode!=ecode){
         r = setInterval(moveRight,snake.speed);
-
+      }
       break;
     case 40:
-
+      if(prevecode!=ecode){
         d = setInterval(moveDown,snake.speed);
-
+      }  
       break;
     }
   };
